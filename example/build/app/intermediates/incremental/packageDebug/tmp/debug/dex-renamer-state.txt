@@ -1,0 +1,4 @@
+#Tue Feb 12 15:35:12 CST 2019
+base.0=D\:\\twork\\plugins\\packages\\webview_flutter\\example\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
