@@ -76,7 +76,8 @@ class WebView extends StatefulWidget {
     Key key,
     this.onWebViewCreated,
     this.initialUrl,
-    this.javascriptMode = JavascriptMode.disabled,
+    this.content,
+    this.javascriptMode = JavascriptMode.unrestricted,
     this.javascriptChannels,
     this.gestureRecognizers,
   })  : assert(javascriptMode != null),
@@ -98,6 +99,7 @@ class WebView extends StatefulWidget {
 
   /// The initial URL to load.
   final String initialUrl;
+  final String content;
 
   /// Whether Javascript execution is enabled.
   final JavascriptMode javascriptMode;
@@ -229,11 +231,15 @@ Set<String> _extractChannelNames(Set<JavascriptChannel> channels) {
 
 class _CreationParams {
   _CreationParams(
-      {this.initialUrl, this.settings, this.javascriptChannelNames});
+      {this.initialUrl,
+      this.content,
+      this.settings,
+      this.javascriptChannelNames});
 
   static _CreationParams fromWidget(WebView widget) {
     return _CreationParams(
       initialUrl: widget.initialUrl,
+      content: widget.content,
       settings: _WebSettings.fromWidget(widget),
       javascriptChannelNames:
           _extractChannelNames(widget.javascriptChannels).toList(),
@@ -241,6 +247,7 @@ class _CreationParams {
   }
 
   final String initialUrl;
+  final String content;
 
   final _WebSettings settings;
 
@@ -249,6 +256,7 @@ class _CreationParams {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'initialUrl': initialUrl,
+      'content': content,
       'settings': settings.toMap(),
       'javascriptChannelNames': javascriptChannelNames,
     };
@@ -325,6 +333,10 @@ class WebViewController {
     // https://github.com/flutter/flutter/issues/26431
     // ignore: strong_mode_implicit_dynamic_method
     return _channel.invokeMethod('loadUrl', url);
+  }
+
+  Future<void> loadUrlContent(String url) async {
+    return _channel.invokeMethod('loadUrlContent', url);
   }
 
   /// Accessor to the current URL that the WebView is displaying.
