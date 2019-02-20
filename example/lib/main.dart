@@ -5,8 +5,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'webview_contentair_page.dart';
 
-void main() => runApp(MaterialApp(home: Demo()));
+void main() => runApp(MaterialApp(home: WebViewContainerPage()));
+
+
+
+
+
+
 String content =
     '&lt;!--商品详情模块--&gt;&lt;img style=&quot;&quot; src=&quot;/images/db/f7/88/50612a3aa4b11f86700318328cee376a6cb56301.jpg&quot;&gt;&lt;img style=&quot;&quot; src=&quot;/images/9a/f1/fb/bc1b28ebb87ff69f50c86c97a278a4e050a906be.jpg&quot;&gt;&lt;img style=&quot;&quot; src=&quot;/images/d8/f0/e7/5d17a8bb52113f1033b3b80a60d0d9d5053ab18f.jpg&quot;&gt;&lt;img style=&quot;&quot; src=&quot;/images/65/b5/1a/3e10ee790ca6385bd1c8934cc4803dd7397b45de.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_05.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_06.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_07.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_08.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_09.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_10.jpg&quot;&gt;&lt;img style=&quot;&quot; src=&quot;/images/1e/9c/a6/bf49433e061c83cfee628df4cf86ece5cb24ec8b.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_12.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_13.jpg&quot;&gt;&lt;img src=&quot;/images/upload_img/Z180405899_ztzs_14.jpg&quot;&gt;&lt;!--商品详情模块end--&gt;';
 String htmlEntityDecode(String string) {
