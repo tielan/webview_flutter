@@ -9,12 +9,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+
 typedef void WebViewCreatedCallback(WebViewController controller);
 
 enum JavascriptMode {
   disabled,
   unrestricted,
 }
+
 class JavascriptMessage {
   const JavascriptMessage(this.message) : assert(message != null);
   final String message;
@@ -22,6 +24,7 @@ class JavascriptMessage {
 
 typedef void JavascriptMessageHandler(JavascriptMessage message);
 final RegExp _validChannelNames = RegExp('^[a-zA-Z_][a-zA-Z0-9]*\$');
+
 class JavascriptChannel {
   JavascriptChannel({
     @required this.name,
@@ -34,21 +37,30 @@ class JavascriptChannel {
 }
 
 class WebView extends StatefulWidget {
-  const WebView({
-    Key key,
-    this.onWebViewCreated,
-    this.initialUrl,
-    this.content,
-    this.javascriptMode = JavascriptMode.unrestricted,
-    this.javascriptChannels,
-    this.gestureRecognizers,
-    this.useShouldOverrideUrlLoading = true
-  })  : assert(javascriptMode != null),
+  const WebView(
+      {Key key,
+      this.onWebViewCreated,
+      this.initialUrl,
+      this.content,
+      this.javascriptMode = JavascriptMode.unrestricted,
+      this.javascriptChannels,
+      this.userAgent,
+      this.clearCache,
+      this.clearCookies,
+      this.setCookies,
+      this.gestureRecognizers,
+      this.useShouldOverrideUrlLoading = true})
+      : assert(javascriptMode != null),
         super(key: key);
   final WebViewCreatedCallback onWebViewCreated;
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
   final String initialUrl;
   final String content;
+  final String userAgent;
+  final bool clearCache;
+  final bool clearCookies;
+  final Map<String,String> setCookies;
+
   final bool useShouldOverrideUrlLoading;
   final JavascriptMode javascriptMode;
   final Set<JavascriptChannel> javascriptChannels;
@@ -144,6 +156,10 @@ class _CreationParams {
       {this.initialUrl,
       this.content,
       this.settings,
+      this.userAgent,
+      this.clearCache,
+      this.clearCookies,
+      this.setCookies,
       this.useShouldOverrideUrlLoading,
       this.javascriptChannelNames});
 
@@ -151,7 +167,11 @@ class _CreationParams {
     return _CreationParams(
       initialUrl: widget.initialUrl,
       content: widget.content,
-      useShouldOverrideUrlLoading:widget.useShouldOverrideUrlLoading,
+      userAgent: widget.userAgent,
+      clearCache: widget.clearCache,
+      clearCookies: widget.clearCookies,
+      setCookies: widget.setCookies,
+      useShouldOverrideUrlLoading: widget.useShouldOverrideUrlLoading,
       settings: _WebSettings.fromWidget(widget),
       javascriptChannelNames:
           _extractChannelNames(widget.javascriptChannels).toList(),
@@ -160,7 +180,11 @@ class _CreationParams {
 
   final String initialUrl;
   final String content;
+  final String userAgent;
   final bool useShouldOverrideUrlLoading;
+  final bool clearCache;
+  final bool clearCookies;
+  final Map<String,String> setCookies;
 
   final _WebSettings settings;
 
@@ -170,9 +194,15 @@ class _CreationParams {
     return <String, dynamic>{
       'initialUrl': initialUrl,
       'content': content,
-      'useShouldOverrideUrlLoading':useShouldOverrideUrlLoading,
+      'userAgent': userAgent,
+      'setCookies': setCookies,
+      'clearCache': clearCache,
+      'clearCookies': clearCookies,
+      'useShouldOverrideUrlLoading': useShouldOverrideUrlLoading,
       'settings': settings.toMap(),
       'javascriptChannelNames': javascriptChannelNames,
+
+
     };
   }
 }
@@ -203,6 +233,7 @@ class _WebSettings {
     };
   }
 }
+
 class WebViewController {
   WebViewController._(
       int id, this._settings, Set<JavascriptChannel> javascriptChannels)
@@ -230,36 +261,43 @@ class WebViewController {
     }
   }
 
-
   Future<void> loadUrl(String url) async {
     assert(url != null);
     _validateUrlString(url);
     return _channel.invokeMethod('loadUrl', url);
   }
+
   Future<void> loadUrlContent(String url) async {
     return _channel.invokeMethod('loadUrlContent', url);
   }
+
   Future<String> currentUrl() async {
     final String url = await _channel.invokeMethod('currentUrl');
     return url;
   }
+
   Future<bool> canGoBack() async {
     final bool canGoBack = await _channel.invokeMethod("canGoBack");
     return canGoBack;
   }
+
   Future<bool> canGoForward() async {
     final bool canGoForward = await _channel.invokeMethod("canGoForward");
     return canGoForward;
   }
+
   Future<void> goBack() async {
     return _channel.invokeMethod("goBack");
   }
+
   Future<void> goForward() async {
     return _channel.invokeMethod("goForward");
   }
+
   Future<void> reload() async {
     return _channel.invokeMethod("reload");
   }
+
   Future<void> _updateSettings(_WebSettings setting) async {
     final Map<String, dynamic> updateMap = _settings.updatesMap(setting);
     if (updateMap == null) {
@@ -296,6 +334,7 @@ class WebViewController {
       _javascriptChannels[channel.name] = channel;
     }
   }
+
   Future<String> evaluateJavascript(String javascriptString) async {
     if (_settings.javascriptMode == JavascriptMode.disabled) {
       throw FlutterError(

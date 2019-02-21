@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -50,6 +54,24 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layout.addView(webView, layoutParams);
 
+        if (params.containsKey("clearCache") && (boolean) params.get("clearCache")) {
+            clearCache();
+        }
+
+        if (params.containsKey("clearCookies") && (boolean) params.get("clearCookies")) {
+            clearCookies();
+        }
+
+        if (params.containsKey("setCookies") && params.get("setCookies") != null) {
+            Map<String,String> cookies = (Map<String,String>)params.get("setCookies");
+            setCookie(cookies.get("domain"),cookies.get("value"));
+        }
+
+        if (params.containsKey("userAgent") && params.get("userAgent") != null) {
+            String userAgent = (String) params.get("userAgent");
+            webView.getSettings().setUserAgentString(userAgent);
+        }
+
         String userAgent = settings.getUserAgentString();
         Log.i("TAG", "User Agent:" + userAgent);
 
@@ -58,8 +80,8 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         methodChannel.setMethodCallHandler(this);
 
         applySettings((Map<String, Object>) params.get("settings"));
-        if(params.containsKey("useShouldOverrideUrlLoading")){
-            useShouldOverrideUrlLoading = Boolean.parseBoolean(params.get("useShouldOverrideUrlLoading")+"");
+        if (params.containsKey("useShouldOverrideUrlLoading")) {
+            useShouldOverrideUrlLoading = Boolean.parseBoolean(params.get("useShouldOverrideUrlLoading") + "");
         }
 
         if (params.containsKey(JS_CHANNEL_NAMES_FIELD)) {
@@ -89,6 +111,38 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
                 }
             });
         }
+    }
+
+    private void setCookie(String url, String value) {
+        //String StringCookie = "key=" + value + ";path=/";
+        CookieManager cookieManager = CookieManager.getInstance();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookieManager.removeSessionCookies(null);
+            cookieManager.flush();
+        } else {
+            cookieManager.removeSessionCookie();
+            CookieSyncManager.getInstance().sync();
+        }
+        cookieManager.setAcceptCookie(true);
+        cookieManager.setCookie(url, value);
+    }
+
+    private void clearCookies() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
+                @Override
+                public void onReceiveValue(Boolean aBoolean) {
+
+                }
+            });
+        } else {
+            CookieManager.getInstance().removeAllCookie();
+        }
+    }
+
+    private void clearCache() {
+        webView.clearCache(true);
+        webView.clearFormData();
     }
 
     void invokeMethod(String channel, String message) {
@@ -205,7 +259,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            invokeMethod("onReceivedTitle", "" +title);
+            invokeMethod("onReceivedTitle", "" + title);
         }
     };
 
