@@ -125,6 +125,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         }
         cookieManager.setAcceptCookie(true);
         cookieManager.setCookie(url, value);
+        Log.i("TAG", "setCookie:" + value);
     }
 
     private void clearCookies() {
