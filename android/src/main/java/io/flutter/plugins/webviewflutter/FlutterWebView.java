@@ -38,7 +38,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     private static final String LOG_TAG = "FlutterWebView";
     private static final String JS_CHANNEL_NAMES_FIELD = "javascriptChannelNames";
     private final WebView webView;
-    private final LinearLayout layout;
+    private LinearLayout layout;
     private final MethodChannel methodChannel;
     private Mobile mobile = new Mobile();
     private boolean useShouldOverrideUrlLoading = false;
@@ -49,13 +49,14 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             webView.getSettings().setSafeBrowsingEnabled(false);
         }
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
         WebSettings settings = webView.getSettings();
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(webViewClient);
         webView.setWebChromeClient(browserChromeClient);
-        layout = new LinearLayout(context);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.addView(webView, layoutParams);
+
 
         if (params.containsKey("clearCache") && (boolean) params.get("clearCache")) {
             clearCache();
@@ -91,9 +92,15 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
             registerJavaScriptChannelNames((List<String>) params.get(JS_CHANNEL_NAMES_FIELD));
         }
         if (params.containsKey("initialUrl") && !TextUtils.isEmpty(params.get("initialUrl") + "")) {
+            layout = new LinearLayout(context);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            layout.addView(webView, layoutParams);
             String initialUrl = (String) params.get("initialUrl");
             webView.loadUrl(initialUrl);
         } else if (params.containsKey("content") && !TextUtils.isEmpty(params.get("content") + "")) {
+            layout = new LinearLayout(context);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layout.addView(webView, layoutParams);
             String content = (String) params.get("content");
             webView.loadDataWithBaseURL("https://pmall.52pht.com/", content, "text/html", "utf-8", null);
         }
@@ -127,7 +134,10 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
             CookieSyncManager.getInstance().sync();
         }
         cookieManager.setAcceptCookie(true);
-        cookieManager.setCookie(url, value);
+        String[] valueArr = value.split(";");
+        for (String item : valueArr) {
+            cookieManager.setCookie(url, item);
+        }
         Log.i("TAG", "setCookie:" + value);
     }
 
