@@ -46,6 +46,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     @SuppressWarnings("unchecked")
     FlutterWebView(Context context, BinaryMessenger messenger, int id, Map<String, Object> params) {
         webView = new WebView(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            webView.getSettings().setSafeBrowsingEnabled(false);
+        }
         WebSettings settings = webView.getSettings();
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(webViewClient);
