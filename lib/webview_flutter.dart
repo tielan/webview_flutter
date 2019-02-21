@@ -45,8 +45,8 @@ class WebView extends StatefulWidget {
       this.javascriptMode = JavascriptMode.unrestricted,
       this.javascriptChannels,
       this.userAgent,
-      this.clearCache,
-      this.clearCookies,
+      this.clearCache = true,
+      this.clearCookies = true,
       this.setCookies,
       this.gestureRecognizers,
       this.useShouldOverrideUrlLoading = true})
