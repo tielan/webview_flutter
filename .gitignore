@@ -5,11 +5,13 @@
 .packages
 .pub/
 build/
+
 ios/.generated/
 packages
 pubspec.lock
 
 example/ios/Podfile.lock
+**/build/
 **/Flutter/App.framework/
 **/Flutter/Flutter.framework/
 **/Flutter/Generated.xcconfig/

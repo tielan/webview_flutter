@@ -103,9 +103,6 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
       case "loadUrl":
         loadUrl(methodCall, result);
         break;
-      case "updateFrame":
-        updateFrame(methodCall, result);
-        break;
       case "loadUrlContent":
         loadUrlContent(methodCall, result);
         break;
@@ -143,13 +140,6 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         result.notImplemented();
     }
   }
-
-  private void updateFrame(MethodCall methodCall, Result result){
-    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-    layoutParams.height = (int)methodCall.arguments;
-    layout.setLayoutParams(layoutParams);
-  }
-
   private void loadUrl(MethodCall methodCall, Result result) {
     String url = (String) methodCall.arguments;
     webView.loadUrl(url);
