@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-#Thu Feb 14 18:24:34 CST 2019
-base.0=D\:\\twork\\git\\webview_flutter\\example\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out
-=======
-#Thu Feb 21 10:19:34 CST 2019
-base.0=D\:\\twork\\webview_flutter\\example\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out
->>>>>>> 4b7d9d12a60d2b20389560e9e150c004545443cf
-path.0=classes.dex
-renamed.0=classes.dex
