@@ -45,8 +45,10 @@ class WebView extends StatefulWidget {
       this.javascriptMode = JavascriptMode.unrestricted,
       this.javascriptChannels,
       this.userAgent,
+      this.domain,
       this.clearCache = true,
       this.clearCookies = true,
+      this.warpContent = false,
       this.setCookies,
       this.gestureRecognizers,
       this.useShouldOverrideUrlLoading = true})
@@ -57,7 +59,10 @@ class WebView extends StatefulWidget {
   final String initialUrl;
   final String content;
   final String userAgent;
+  final String domain;
   final bool clearCache;
+  //包裹内容
+  final bool warpContent;
   final bool clearCookies;
   final Map<String,String> setCookies;
 
@@ -157,8 +162,10 @@ class _CreationParams {
       this.content,
       this.settings,
       this.userAgent,
+      this.warpContent,
       this.clearCache,
       this.clearCookies,
+      this.domain,
       this.setCookies,
       this.useShouldOverrideUrlLoading,
       this.javascriptChannelNames});
@@ -169,6 +176,8 @@ class _CreationParams {
       content: widget.content,
       userAgent: widget.userAgent,
       clearCache: widget.clearCache,
+      domain:widget.domain,
+      warpContent:widget.warpContent,
       clearCookies: widget.clearCookies,
       setCookies: widget.setCookies,
       useShouldOverrideUrlLoading: widget.useShouldOverrideUrlLoading,
@@ -181,8 +190,10 @@ class _CreationParams {
   final String initialUrl;
   final String content;
   final String userAgent;
+  final String domain;
   final bool useShouldOverrideUrlLoading;
   final bool clearCache;
+  final bool warpContent;
   final bool clearCookies;
   final Map<String,String> setCookies;
 
@@ -195,8 +206,10 @@ class _CreationParams {
       'initialUrl': initialUrl,
       'content': content,
       'userAgent': userAgent,
+      'domain':domain,
       'setCookies': setCookies,
       'clearCache': clearCache,
+      'warpContent':warpContent,
       'clearCookies': clearCookies,
       'useShouldOverrideUrlLoading': useShouldOverrideUrlLoading,
       'settings': settings.toMap(),

@@ -42,6 +42,8 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     private final MethodChannel methodChannel;
     private Mobile mobile = new Mobile();
     private boolean useShouldOverrideUrlLoading = false;
+    private boolean warpContent = false;
+    private String domain;
 
     @SuppressWarnings("unchecked")
     FlutterWebView(Context context, BinaryMessenger messenger, int id, Map<String, Object> params) {
@@ -61,6 +63,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         if (params.containsKey("clearCache") && (boolean) params.get("clearCache")) {
             clearCache();
         }
+        if (params.containsKey("warpContent") && (boolean) params.get("warpContent")) {
+            warpContent = true;
+        }
 
         if (params.containsKey("clearCookies") && (boolean) params.get("clearCookies")) {
             clearCookies();
@@ -71,9 +76,14 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
             setCookie(cookies.get("domain"), cookies.get("value"));
         }
 
+
         if (params.containsKey("userAgent") && params.get("userAgent") != null) {
             String userAgent = (String) params.get("userAgent");
             webView.getSettings().setUserAgentString(userAgent);
+        }
+
+        if (params.containsKey("domain") && params.get("domain") != null) {
+            domain = (String) params.get("domain");
         }
 
         String userAgent = settings.getUserAgentString();
@@ -91,18 +101,18 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         if (params.containsKey(JS_CHANNEL_NAMES_FIELD)) {
             registerJavaScriptChannelNames((List<String>) params.get(JS_CHANNEL_NAMES_FIELD));
         }
-        if (params.containsKey("initialUrl") && !TextUtils.isEmpty(params.get("initialUrl") + "")) {
+        if (params.containsKey("initialUrl") && params.get("initialUrl") != null && !TextUtils.isEmpty(params.get("initialUrl") + "")) {
             layout = new LinearLayout(context);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             layout.addView(webView, layoutParams);
             String initialUrl = (String) params.get("initialUrl");
             webView.loadUrl(initialUrl);
-        } else if (params.containsKey("content") && !TextUtils.isEmpty(params.get("content") + "")) {
+        } else if (params.containsKey("content") && params.get("content") != null && !TextUtils.isEmpty(params.get("content") + "")) {
             layout = new LinearLayout(context);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, warpContent ? LinearLayout.LayoutParams.WRAP_CONTENT : LinearLayout.LayoutParams.MATCH_PARENT);
             layout.addView(webView, layoutParams);
             String content = (String) params.get("content");
-            webView.loadDataWithBaseURL("https://pmall.52pht.com/", content, "text/html", "utf-8", null);
+            webView.loadDataWithBaseURL(domain, content, "text/html", "utf-8", null);
         }
 
     }
@@ -117,6 +127,10 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
                 public void run() {
                     webView.measure(0, 0);
                     int measuredHeight = webView.getMeasuredHeight();
+                    if (warpContent) {
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, measuredHeight);
+                        layout.setLayoutParams(layoutParams);
+                    }
                     invokeMethod("onGetWebContentHeight", "" + measuredHeight);
                 }
             });

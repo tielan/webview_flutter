@@ -4,16 +4,17 @@ import 'package:webview_flutter/webview_flutter.dart';
 const kAndroidUserAgent =
     'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36; PMALL_Android';
 
-class WebViewContainerPage extends StatefulWidget {
+
+class FullWebPage extends StatefulWidget {
   final Map initParams;
 
-  WebViewContainerPage({Key key, @required this.initParams}) : super(key: key);
+  FullWebPage({Key key, @required this.initParams}) : super(key: key);
 
   @override
-  _WebViewContainerPageState createState() => _WebViewContainerPageState();
+  _FullWebPageState createState() => new _FullWebPageState();
 }
 
-class _WebViewContainerPageState extends State<WebViewContainerPage> {
+class _FullWebPageState extends State<FullWebPage> {
   WebViewController _controller;
   String webTitle = '';
   String initUrl = 'https://pmall.52pht.com/';
@@ -38,28 +39,28 @@ class _WebViewContainerPageState extends State<WebViewContainerPage> {
           centerTitle: true,
           elevation: 1),
       body: WillPopScope(
-        onWillPop: () async {
-          if (await _controller.canGoBack()) {
-            _controller.goBack();
-            return new Future.value(false);
-          } else {
-            return new Future.value(true);
-          }
-        },
-        child: WebView(
-          content: widget.initParams['content'],
-          domain: widget.initParams['domain'],
-          clearCache: true,
-          setCookies: {
-            'domain': 'https//52pht.com',
-            'value': cookiesValue
+          onWillPop: () async {
+            if (await _controller.canGoBack()) {
+              _controller.goBack();
+              return new Future.value(false);
+            } else {
+              return new Future.value(true);
+            }
           },
-          userAgent: kAndroidUserAgent,
-          onWebViewCreated: (WebViewController webViewController) {
-            _controller = webViewController;
-          },
-          javascriptChannels: initHandler(context),
-        )
+          child: WebView(
+            content: widget.initParams['content'],
+            domain: widget.initParams['domain'],
+            clearCache: true,
+            setCookies: {
+              'domain': 'https//52pht.com',
+              'value': cookiesValue
+            },
+            userAgent: kAndroidUserAgent,
+            onWebViewCreated: (WebViewController webViewController) {
+              _controller = webViewController;
+            },
+            javascriptChannels: initHandler(context),
+          )
       ),
     );
   }

@@ -87,19 +87,31 @@
       <sourceFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/source/apt/test/debug" isTestSource="true" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/aapt_friendly_merged_manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotation_processor_list" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotations_typedef_file" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotations_zip" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/check_manifest_result" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/compile_only_not_namespaced_r_class_jar" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/consumer_proguard_file" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/full_jar" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/intermediate-jars" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/javac" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_and_local_jars_jni" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_assets" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/lint_jar" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/merged_manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/packaged-classes" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/packaged_res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/public_res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/shader_assets" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/tmp" />
     </content>
