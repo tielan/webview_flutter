@@ -35,13 +35,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
@@ -49,6 +42,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -85,37 +85,26 @@
       <sourceFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/res/resValues/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/source/apt/test/debug" isTestSource="true" generated="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/not_namespaced_r_class_sources" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/generated/source/r" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/aapt_friendly_merged_manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotation_processor_list" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotations_typedef_file" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/annotations_zip" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/check_manifest_result" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/compile_only_not_namespaced_r_class_jar" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/full_jar" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/intermediate-jars" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/javac" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_and_local_jars_jni" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_assets" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/library_manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/lint_jar" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/merged_manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/packaged-classes" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/packaged_res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/public_res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/rs" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/shader_assets" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/../example/build/webview_flutter/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\flutter\flutter1.0.0\bin\cache\artifacts\engine\android-arm\flutter.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\flutter\flutter1.0.0\bin\cache\artifacts\engine\android-arm\flutter.jar:unspecified@jar" level="project" />
   </component>
 </module>

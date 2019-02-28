@@ -49,7 +49,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             webView.getSettings().setSafeBrowsingEnabled(false);
         }
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
         WebSettings settings = webView.getSettings();
@@ -67,8 +67,8 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         }
 
         if (params.containsKey("setCookies") && params.get("setCookies") != null) {
-            Map<String,String> cookies = (Map<String,String>)params.get("setCookies");
-            setCookie(cookies.get("domain"),cookies.get("value"));
+            Map<String, String> cookies = (Map<String, String>) params.get("setCookies");
+            setCookie(cookies.get("domain"), cookies.get("value"));
         }
 
         if (params.containsKey("userAgent") && params.get("userAgent") != null) {
@@ -284,9 +284,6 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
             case "loadUrl":
                 loadUrl(methodCall, result);
                 break;
-            case "updateFrame":
-                updateFrame(methodCall, result);
-                break;
             case "loadUrlContent":
                 loadUrlContent(methodCall, result);
                 break;
@@ -324,88 +321,11 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
                 result.notImplemented();
         }
     }
-<<<<<<< HEAD
-  };
-
-  @Override
-  public void onMethodCall(MethodCall methodCall, Result result) {
-    switch (methodCall.method) {
-      case "loadUrl":
-        loadUrl(methodCall, result);
-        break;
-      case "loadUrlContent":
-        loadUrlContent(methodCall, result);
-        break;
-      case "updateSettings":
-        updateSettings(methodCall, result);
-        break;
-      case "canGoBack":
-        canGoBack(methodCall, result);
-        break;
-      case "canGoForward":
-        canGoForward(methodCall, result);
-        break;
-      case "goBack":
-        goBack(methodCall, result);
-        break;
-      case "goForward":
-        goForward(methodCall, result);
-        break;
-      case "reload":
-        reload(methodCall, result);
-        break;
-      case "currentUrl":
-        currentUrl(methodCall, result);
-        break;
-      case "evaluateJavascript":
-        evaluateJavaScript(methodCall, result);
-        break;
-      case "addJavascriptChannels":
-        addJavaScriptChannels(methodCall, result);
-        break;
-      case "removeJavascriptChannels":
-        removeJavaScriptChannels(methodCall, result);
-        break;
-      default:
-        result.notImplemented();
-    }
-  }
-  private void loadUrl(MethodCall methodCall, Result result) {
-    String url = (String) methodCall.arguments;
-    webView.loadUrl(url);
-    result.success(null);
-  }
-
-  private void loadUrlContent(MethodCall methodCall, Result result) {
-    String content = (String) methodCall.arguments;
-    webView.loadDataWithBaseURL("https://pmall.52pht.com/",content, "text/html",  "utf-8",null );
-    result.success(null);
-  }
-
-  private void canGoBack(MethodCall methodCall, Result result) {
-    result.success(webView.canGoBack());
-  }
-
-  private void canGoForward(MethodCall methodCall, Result result) {
-    result.success(webView.canGoForward());
-  }
-
-  private void goBack(MethodCall methodCall, Result result) {
-    if (webView.canGoBack()) {
-      webView.goBack();
-=======
-
-    private void updateFrame(MethodCall methodCall, Result result) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.height = (int) methodCall.arguments;
-        layout.setLayoutParams(layoutParams);
-    }
 
     private void loadUrl(MethodCall methodCall, Result result) {
         String url = (String) methodCall.arguments;
         webView.loadUrl(url);
         result.success(null);
->>>>>>> 4b7d9d12a60d2b20389560e9e150c004545443cf
     }
 
     private void loadUrlContent(MethodCall methodCall, Result result) {

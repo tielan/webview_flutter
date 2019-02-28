@@ -7,11 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'webview_contentair_page.dart';
 
-void main() => runApp(MaterialApp(home: WebViewContainerPage()));
-
-
-
-
+void main() => runApp(MaterialApp(home: WebViewContainerPage(initParams: {})));
 
 
 String content =
