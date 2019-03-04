@@ -21,6 +21,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import io.flutter.plugin.common.BinaryMessenger;
@@ -128,7 +129,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
                     webView.measure(0, 0);
                     int measuredHeight = webView.getMeasuredHeight();
                     if (warpContent) {
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, measuredHeight);
+                        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, measuredHeight);
                         layout.setLayoutParams(layoutParams);
                     }
                     invokeMethod("onGetWebContentHeight", "" + measuredHeight);
