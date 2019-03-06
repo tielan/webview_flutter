@@ -35,6 +35,7 @@ example/build/
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
 **/android/.idea
+**/android/*.iml
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat

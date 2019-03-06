@@ -59,7 +59,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(webViewClient);
         webView.setWebChromeClient(browserChromeClient);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
 
         if (params.containsKey("clearCache") && (boolean) params.get("clearCache")) {
             clearCache();
